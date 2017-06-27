@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Icandi Abby Only</title>
+<style type="text/css">
+    form{
+        margin: 20px 0;
+    }
+    form input, button{
+        padding: 5px;
+    }
+    table{
+        width: 100%;
+        margin-bottom: 20px;
+		border-collapse: collapse;
+    }
+    table, th, td{
+        border: 1px solid #cdcdcd;
+    }
+    table th, table td{
+        padding: 10px;
+        text-align: left;
+    }
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script class= "jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" ></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".add-row").click(function(){
+            var date = $("#date").val();
+            var nameEvent = $("#nameEvent").val();
+			var venue = $("#venue").val();
+			var time = $("#time").val();
+			var city = $("#city").val();
+			var state = $("#state").val();
+            var markup = "<tr><td><input type='checkbox' name='record'></td><td>" + date + "</td><td>" + nameEvent + "</td><td>"
+			+ venue + "</td><td>" + time + "</td><td>" + city + "</td><td>" + state + "</td></tr>";
+            $("table tbody").append(markup);
+        });
+        
+        // Find and remove selected table rows
+        $(".delete-row").click(function(){
+            $("table tbody").find('input[name="record"]').each(function(){
+            	if($(this).is(":checked")){
+                    $(this).parents("tr").remove();
+                }
+            });
+        });
+    });
+
+	$(function() {
+	
+	var edit = document.getElementById('edit');
+	
+	$(edit).blur(function() {
+	  localStorage.setItem('setEvent' , this.innerHTML);
+	 }); 
+	 
+	 if (localStorage.getItem('setEvent')) {
+	 edit.innerHTML = localStorage.getItem('setEvent');
+	 }
+	
+	});
+</script>
+</head>
+<body>
+    <form>
+        <p>Date: <input type="date" id="date" placeholder = "date" /></p>
+		<p>Name of Event: <input type="text" id="nameEvent" placeholder="Name of Event" /></p>
+		<p>Venue: <input type="text" id="venue" placeholder="Venue" /></p>
+		<p>Time: <input type="time" id="time" placeholder="Time" /></p>
+		<p>City: <input type="text" id="city" placeholder="City" /></p>
+		<p>State: <input type="text" id="state" placeholder="State" /></p>
+    	<p><input type="button" class="add-row" value="Add Row"></p>
+    </form>
+    <table id='edit' contenteditable= 'true'>
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Date</th>
+				<th>Name of Event</th>
+				<th>Venue</th>
+				<th>Time</th>
+                <th>City</th>
+				<th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" name="record"></td>
+                <td>04-05-2017</td>
+                <td>Wet</td>
+				<td>Oyx</td>
+                <td>10:00pm</td>
+				<td>Atlanta</td>
+                <td>Georgia</td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="delete-row">Delete Row</button>
+
+</body> 
+</html>                                		
